@@ -1,5 +1,6 @@
 2016 Release next
 
+* Added more spec files ([#5](https://github.com/jkroepke/puppet-module-autofs/pull/5))
 * Add parameter maptype ([#4](https://github.com/jkroepke/puppet-module-autofs/pull/4); jearls)
 * Add ensure parameter to ::autofs::mapfile ([#2](https://github.com/jkroepke/puppet-module-autofs/pull/2); jearls)
 
