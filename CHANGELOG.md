@@ -1,4 +1,4 @@
-2016 Release next
+2016-07-03 Release 2.0.3
 
 * Added more spec files ([#5](https://github.com/jkroepke/puppet-module-autofs/pull/5))
 * Add parameter maptype ([#4](https://github.com/jkroepke/puppet-module-autofs/pull/4); jearls)
