@@ -11,7 +11,7 @@ class autofs::service inherits autofs {
       name       => $autofs::service_name,
       hasstatus  => $autofs::service_hasstatus,
       hasrestart => $autofs::service_hasrestart,
-      restart    => $autofs::service_restart
+      restart    => $autofs::service_restart;
     }
   }
 }

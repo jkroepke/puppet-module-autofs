@@ -69,10 +69,10 @@ define autofs::mapfile(
       warn           => true,
       ensure_newline => true,
       notify         => Class['autofs::service'],
-      require        => Class['autofs::install'],
+      require        => Class['autofs::install'];
     }
 
-    create_resources('autofs::mount', $mounts, {
+    create_resources('autofs::mount', $mounts, { # lint:ignore:strict_indent
       map => $mapfile
     })
   }

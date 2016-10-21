@@ -4,7 +4,7 @@ define autofs::mount(
   $map,
   $mount   = $name,
   $ensure  = 'present',
-  $options = undef,
+  $options = 'rw',
   $order   = undef,
 ) {
   validate_string($mapfile)
