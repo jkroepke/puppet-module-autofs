@@ -47,4 +47,3 @@ describe 'autofs::mount' do
     end
   end
 end
-

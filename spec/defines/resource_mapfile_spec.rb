@@ -68,6 +68,4 @@ describe 'autofs::mapfile' do
       should_not contain_concat('auto.foo')
     end
   end
-
 end
-

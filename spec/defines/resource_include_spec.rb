@@ -22,4 +22,3 @@ describe 'autofs::include' do
     end
   end
 end
-
