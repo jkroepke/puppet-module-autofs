@@ -12,7 +12,7 @@ end
 
 group :test do
   gem 'puppetlabs_spec_helper', '~> 2.0.1',                         :require => false
-#  gem 'parallel_tests',                                             :require => false
+  gem 'parallel_tests',                                             :require => false
   gem 'rspec-puppet', '~> 2.5',                                     :require => false
   gem 'rspec-puppet-facts',                                         :require => false
   gem 'rspec-puppet-utils',                                         :require => false
@@ -33,9 +33,9 @@ group :test do
   gem 'mocha', '>= 1.2.1',                                          :require => false
   gem 'coveralls',                                                  :require => false
   gem 'simplecov-console',                                          :require => false
-#  gem 'github_changelog_generator', '~> 1.13.0',                    :require => false if RUBY_VERSION < '2.2.2'
+  gem 'github_changelog_generator', '~> 1.13.0',                    :require => false if RUBY_VERSION < '2.2.2'
   gem 'rack', '~> 1.0',                                             :require => false if RUBY_VERSION < '2.2.2'
-#  gem 'github_changelog_generator',                                 :require => false if RUBY_VERSION >= '2.2.2'
+  gem 'github_changelog_generator',                                 :require => false if RUBY_VERSION >= '2.2.2'
 end
 
 group :development do
