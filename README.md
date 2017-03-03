@@ -61,7 +61,7 @@ autofs::service_restart: '/usr/bin/systemctl reload autofs'
 ```puppet
 ::autofs::mapfile{ 'auto.share':
   ensure    => absent,
-  directory => '/-',
+  directory => '/-';
 }
 ```
 
@@ -69,14 +69,15 @@ autofs::service_restart: '/usr/bin/systemctl reload autofs'
 ```puppet
 ::autofs::mapfile{ 'auto.home':
   ensure    => purged,
-  directory => '/home',
+  directory => '/home';
+}
 ```
 
 ### Added a map file with a non-'file' type
 ```puppet
 ::autofs::mapfile{ 'auto.chroot':
   directory => '/chroot',
-  maptype   => program ,
+  maptype   => 'program';
 }
 ```
 
