@@ -4,7 +4,7 @@ define autofs::mount(
   $map,
   $mount   = $name,
   $ensure  = 'present',
-  $options = 'rw',
+  $options = '-rw',
   $order   = undef,
 ) {
   validate_string($mapfile)
@@ -13,6 +13,7 @@ define autofs::mount(
   validate_string($options)
 
   validate_re($ensure, '^present$|^absent$', 'ensure must be one of: present or absen')
+  validate_re($options, '^-', 'options must start with a hypen')
 
   include ::autofs
 
