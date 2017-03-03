@@ -1,3 +1,8 @@
+2017-03-04 Release 2.0.4
+
+* Set default mount options to `-rw` to prevent autofs syntax errors.
+* Reduce the size of the forge archive
+
 2016-10-21 Release 2.0.3
 
 * Added more spec files ([#5](https://github.com/jkroepke/puppet-module-autofs/pull/5))
