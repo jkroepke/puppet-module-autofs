@@ -14,7 +14,7 @@ describe 'autofs::mount' do
     it { is_expected.not_to raise_error }
     it do
       is_expected.to contain_concat__fragment('/mnt/foo@auto.foo').with(
-        'content' => %r{/mnt/foo rw nfsserver:/nfs/share}
+        'content' => %r{/mnt/foo -rw nfsserver:/nfs/share}
       )
     end
   end
@@ -28,11 +28,11 @@ describe 'autofs::mount' do
   end
 
   describe 'testing parameter options' do
-    let(:params) { { mapfile: 'auto.foo', map: 'nfsserver:/nfs/share', options: 'ro', ensure: 'present' } }
+    let(:params) { { mapfile: 'auto.foo', map: 'nfsserver:/nfs/share', options: '-ro', ensure: 'present' } }
     it { is_expected.not_to raise_error }
     it do
       is_expected.to contain_concat__fragment('/mnt/foo@auto.foo').with(
-        'content' => %r{/mnt/foo ro nfsserver:/nfs/share}
+        'content' => %r{/mnt/foo -ro nfsserver:/nfs/share}
       )
     end
   end
