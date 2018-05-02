@@ -2,12 +2,11 @@
   "name": "jkroepke-autofs",
   "version": "2.0.4",
   "author": "Jan-Otto Kröpke",
-  "license": "Apache-2.0",
   "summary": "Puppet module for autofs",
-  "project_page": "https://github.com/jkroepke/puppet-module-autofs",
+  "license": "Apache-2.0",
   "source": "https://github.com/jkroepke/puppet-module-autofs",
+  "project_page": "https://github.com/jkroepke/puppet-module-autofs",
   "issues_url": "https://github.com/jkroepke/puppet-module-autofs/issues",
-  "tags": ["autofs", "automount", "mount"],
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
@@ -79,5 +78,13 @@
       "name": "puppet",
       "version_requirement": ">= 3.2.0 < 5.0.0"
     }
-  ]
+  ],
+  "tags": [
+    "autofs",
+    "automount",
+    "mount"
+  ],
+  "pdk-version": "1.5.0",
+  "template-url": "file:///opt/puppetlabs/pdk/share/cache/pdk-templates.git",
+  "template-ref": "1.5.0-0-gd1b3eca"
 }
