@@ -1,3 +1,8 @@
+XXXX-XX-XX Release next
+
+* Converted the module to use Puppet Development Kit. ([#10](https://github.com/jkroepke/puppet-module-autofs/pull/10); rehanone)
+
+
 2017-03-04 Release 2.0.4
 
 * Set default mount options to `-rw` to prevent autofs syntax errors.
