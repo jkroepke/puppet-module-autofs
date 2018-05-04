@@ -1,11 +1,12 @@
-define autofs::include(
-  $mapfile = $name,
-  $order   = undef
+#
+define autofs::include (
+  String $mapfile         = $title,
+  Optional[String] $order = undef
 ) {
   include ::autofs
 
   if $mapfile == $autofs::master_config {
-    fail("${autofs::mapfile_config_dir}/${autofs::master_config} can't include itself!")
+    fail("${autofs::map_config_dir}/${autofs::master_config} can't include itself!")
   }
 
   concat::fragment { "${autofs::master_config}/${mapfile}":
