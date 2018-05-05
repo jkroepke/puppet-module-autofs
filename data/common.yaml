@@ -1,0 +1,11 @@
+---
+autofs::package_manage: true
+autofs::package_ensure: 'installed'
+autofs::service_manage: true
+autofs::service_ensure: 'running'
+autofs::service_enable: true
+autofs::service_restart: null
+
+autofs::config_file_group: 'root'
+autofs::config_file_owner: 'root'
+autofs::master_config: 'auto.master'

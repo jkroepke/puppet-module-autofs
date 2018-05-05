@@ -1,0 +1,8 @@
+---
+autofs::map_config_dir: '/etc/autofs'
+autofs::package_name: [ 'net-fs/autofs' ]
+autofs::service_name: 'autofs'
+autofs::service_hasrestart: true
+autofs::service_hasstatus: true
+autofs::supported_map_types: [ 'file', 'program', 'yp', 'nisplus', 'hesiod', 'ldap', 'ldaps' ]
+autofs::use_map_prefix: true

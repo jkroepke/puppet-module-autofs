@@ -1,0 +1,9 @@
+---
+autofs::master_config: 'auto_master'
+autofs::map_config_dir: '/etc'
+autofs::package_name: [] # solaris has it built-in, no package required
+autofs::service_name: 'autofs'
+autofs::service_hasrestart: true
+autofs::service_hasstatus: true
+autofs::supported_map_types: [ 'file', 'program' ]
+autofs::use_map_prefix: false

@@ -55,7 +55,8 @@
       "operatingsystemrelease": [
         "6",
         "7",
-        "8"
+        "8",
+        "9"
       ]
     },
     {
@@ -63,7 +64,8 @@
       "operatingsystemrelease": [
         "12.04",
         "14.04",
-        "16.04"
+        "16.04",
+        "18.04"
       ]
     },
     {
@@ -76,7 +78,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.7.0 < 6.0.0"
+      "version_requirement": ">= 4.10.0 < 6.0.0"
     }
   ],
   "tags": [
