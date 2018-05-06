@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-if Puppet::Util::Package.versioncmp(Puppet.version, '4.7.0') >= 0
+if Puppet::Util::Package.versioncmp(Puppet.version, '4.10.0') >= 0
   describe 'Autofs::MountOptions' do
     describe 'accepts any string that starts with hyphen' do
       [
