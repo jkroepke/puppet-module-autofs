@@ -1,23 +1,56 @@
+require 'puppet'
 require 'beaker-rspec'
+require 'beaker/puppet_install_helper'
+require 'beaker/module_install_helper'
 
-hosts.each do |host|
-  # Install Puppet
-  on host, install_puppet
-end
+run_puppet_install_helper
+install_ca_certs unless ENV['PUPPET_INSTALL_TYPE'] =~ %r{pe}i
+install_module_on(hosts)
+install_module_dependencies_on(hosts)
+
+UNSUPPORTED_PLATFORMS = %w[windows AIX].freeze
 
 RSpec.configure do |c|
-  # Project root
-  proj_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
-
+  # Readable test descriptions
   c.formatter = :documentation
 
-  # This is where we 'setup' the nodes before running our tests
+  # Configure all nodes in nodeset
   c.before :suite do
-    hosts.each do |host|
-      # Install module
-      copy_module_to(host, source: proj_root, module_name: 'autofs')
-      on host, puppet('module', 'install', 'puppetlabs-stdlib'), acceptable_exit_codes: [0, 1]
-      on host, puppet('module', 'install', 'puppetlabs-concat'), acceptable_exit_codes: [0, 1]
+  end
+end
+
+def return_puppet_version
+  (on default, puppet('--version')).output.chomp
+end
+
+RSpec.shared_context 'with faked facts' do
+  let(:facts_d) do
+    puppet_version = return_puppet_version
+    if fact('osfamily') =~ %r{windows}i
+      if fact('kernelmajversion').to_f < 6.0
+        'C:/Documents and Settings/All Users/Application Data/PuppetLabs/facter/facts.d'
+      else
+        'C:/ProgramData/PuppetLabs/facter/facts.d'
+      end
+    elsif Puppet::Util::Package.versioncmp(puppet_version, '4.0.0') < 0 && fact('is_pe', '--puppet') == 'true'
+      '/etc/puppetlabs/facter/facts.d'
+    else
+      '/etc/facter/facts.d'
     end
+  end
+
+  before :each do
+    # No need to create on windows, PE creates by default
+    if fact('osfamily') !~ %r{windows}i
+      shell("mkdir -p '#{facts_d}'")
+    end
+  end
+
+  after :each do
+    shell("rm -f '#{facts_d}/fqdn.txt'", acceptable_exit_codes: [0, 1])
+  end
+
+  def fake_fact(name, value)
+    shell("echo #{name}=#{value} > '#{facts_d}/#{name}.txt'")
   end
 end
