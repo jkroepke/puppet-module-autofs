@@ -24,10 +24,10 @@ Installs and configures autofs which provides automount functionality. Tested wi
 
 ### Beginning with autofs
 
-`include '::autofs'` is enough to get you up and running.  If you wish to pass in parameters specifying which servers to use, then:
+`include 'autofs'` is enough to get you up and running.  If you wish to pass in parameters specifying which servers to use, then:
 
 ```puppet
-class { '::autofs':
+class { 'autofs':
   package_manage  => false,
   service_restart => '/usr/bin/systemctl reload autofs';
 }
@@ -43,7 +43,7 @@ autofs::service_restart: '/usr/bin/systemctl reload autofs'
 
 ### Added a map file
 ```puppet
-::autofs::mapfile{ 'auto.home':
+autofs::mapfile{ 'auto.home':
   directory => '/home',
   options   => '--timeout 300';
 }
@@ -51,7 +51,7 @@ autofs::service_restart: '/usr/bin/systemctl reload autofs'
 
 ### Added a map file with direct mount
 ```puppet
-::autofs::mapfile{ 'auto.share':
+autofs::mapfile{ 'auto.share':
   directory => '/-',
   options   => '--timeout 300';
 }
@@ -59,7 +59,7 @@ autofs::service_restart: '/usr/bin/systemctl reload autofs'
 
 ### Remove a no-longer-needed map file
 ```puppet
-::autofs::mapfile{ 'auto.share':
+autofs::mapfile{ 'auto.share':
   ensure    => absent,
   directory => '/-';
 }
@@ -67,7 +67,7 @@ autofs::service_restart: '/usr/bin/systemctl reload autofs'
 
 ### Remove a no-longer-needed map file and purge the mount directory:
 ```puppet
-::autofs::mapfile{ 'auto.home':
+autofs::mapfile{ 'auto.home':
   ensure    => purged,
   directory => '/home';
 }
@@ -75,7 +75,7 @@ autofs::service_restart: '/usr/bin/systemctl reload autofs'
 
 ### Added a map file with a non-'file' type
 ```puppet
-::autofs::mapfile{ 'auto.chroot':
+autofs::mapfile{ 'auto.chroot':
   directory => '/chroot',
   maptype   => 'program';
 }
@@ -83,12 +83,12 @@ autofs::service_restart: '/usr/bin/systemctl reload autofs'
 
 ### Include an other master config
 ```puppet
-::autofs::include{ 'auto.local': }
+autofs::include{ 'auto.local': }
 ```
 
 ### Adding a mount
 ```puppet
-::autofs::mount { 'remote': 
+autofs::mount { 'remote': 
   mapfile => 'auto.share',
   options => '-fstype=nfs,rw,bg',
   map     => 'nfsserver:/nfs/share';
@@ -97,7 +97,7 @@ autofs::service_restart: '/usr/bin/systemctl reload autofs'
 
 ### Adding a mount to a direct mount mapfile
 ```puppet
-::autofs::mount { '/share/remote': 
+autofs::mount { '/share/remote': 
   mapfile => 'auto.share',
   options => '-fstype=nfs,rw,bg',
   map     => 'nfsserver:/nfs/share';
@@ -106,7 +106,7 @@ autofs::service_restart: '/usr/bin/systemctl reload autofs'
 
 ### Adding a mount with dynamic mount points
 ```puppet
-::autofs::mount { '*': 
+autofs::mount { '*': 
   mapfile => 'auto.home',
   options => '-fstype=nfs,rw,bg',
   map     => 'nfsserver:/nfs/homes/&';
@@ -115,7 +115,7 @@ autofs::service_restart: '/usr/bin/systemctl reload autofs'
 
 ### Adding a mount with the same name on other mapfiles
 ```puppet
-::autofs::mount { '*@auto.home2': 
+autofs::mount { '*@auto.home2': 
   mount   => '*',
   mapfile => 'auto.home2',
   options => '-fstype=nfs,rw,bg',
@@ -159,150 +159,150 @@ autofs::mounts:
 
 ## Reference
 
-###Classes
+### Classes
 
-####Public Classes
+#### Public Classes
 
 * autofs: Main class, includes all other classes.
 
-####Private Classes
+#### Private Classes
 
 * autofs::install: Handles the packages.
 * autofs::config: Handles the configuration file.
 * autofs::service: Handles the service.
 
-####Types
+#### Types
 
 * autofs::include: Adds additional includes to auto.master 
 * autofs::mapfile: Adds mapfile to auto.master
 * autofs::mount: Adds mounts to mapfiles
 
-###Parameters
+### Parameters
 
 #### The following parameters are available in the `::autofs` class:
 
-####`config_file_owner`  
+#### `config_file_owner`  
 
 Tells Puppet what the file owner of the generated config files. Valid options: valid unix user. Default value: 'root'
 
-####`config_file_group`  
+#### `config_file_group`  
 
 Tells Puppet what the file group of the generated config files. Valid options: valid unix group. Default value: 'root'
     
-####`master_config`
+#### `master_config`
 
 Tells Puppet what the name of the auto.master config file. Valid options: string. Default value: varies by operating system
 
-####`map_config_dir`   
+#### `map_config_dir`   
 
 Tells Puppet what the directory where is the `master_config` located. Valid options: string. Default value: varies by operating system 
     
-####`package_ensure`
+#### `package_ensure`
 
 Tells Puppet whether the autofs package should be installed, and what version. Valid options: 'present', 'latest', or a specific version number. Default value: 'present'
 
-####`package_manage`
+#### `package_manage`
 
 Tells Puppet whether to manage the autofs package. Valid options: 'true' or 'false'. Default value: 'true'
 
-####`package_name`
+#### `package_name`
 
 Tells Puppet what autofs package to manage. Valid options: string. Default value: 'autofs' (autofs-ldap on debian familliy)
 
-####`service_enable`
+#### `service_enable`
 
 Tells Puppet whether to enable the autofs service at boot. Valid options: 'true' or 'false'. Default value: 'true'
 
-####`service_ensure`
+#### `service_ensure`
 
 Tells Puppet whether the autofs service should be running. Valid options: 'running' or 'stopped'. Default value: 'running'
 
-####`service_manage`
+#### `service_manage`
 
 Tells Puppet whether to manage the autofs service. Valid options: 'true' or 'false'. Default value: 'true'
 
-####`service_name`
+#### `service_name`
 
 Tells Puppet what autofs service to manage. Valid options: string. Default value: varies by operating system
 
-####`service_hasrestart`
+#### `service_hasrestart`
 
 Tells Puppet whether the autofs service has a restart option. Valid options: string. Default value: varies by operating system
 
-####`service_hasstatus`
+#### `service_hasstatus`
 
 Tells Puppet whether the autofs service has a status option. Valid options: string. Default value: varies by operating system
 
-####`service_restart`
+#### `service_restart`
 
 Tells Puppet the restart command of the autofs service. Usefull, if you want to reload autofs instead restart. Valid options: string. Default value: undef
 
-####`mapfiles`
+#### `mapfiles`
 
 Hash of `autofs::mapfile` resources. Valid options: hash. Default value: Empty hash
 
-####`mounts`
+#### `mounts`
 
 Hash of `autofs::mount` resources. Valid options: hash. Default value: Empty hash
 
-####`includes`
+#### `includes`
 
 Hash of `autofs::include` resources. Valid options: hash. Default value: Empty hash
   
 
-####The following parameters are available in the `::autofs::include` type:
+#### The following parameters are available in the `::autofs::include` type:
 
-####`mapfile`
+#### `mapfile`
 
 Name of the mapfile to be included. Valid options: string. No default value
 
-####`order`
+#### `order`
 
 Order of the entry on the `master_config` config file (Will be passthrough to `concat::fragment`). Valid options: string. Default value: undef
   
 
-####The following parameters are available in the `::autofs::mapfile` type:
+#### The following parameters are available in the `::autofs::mapfile` type:
 
-####`directory`
+#### `directory`
 
 Base directory for this mapfile (Use '/-' for direct mounts). Valid options: string. No default value
 
-####`mapfile`
+#### `mapfile`
 
 Name of the mapfile. Valid options: string. Default value: `$name`
 
-####`order`
+#### `order`
 
 Order of the entry on the `master_config` config file (Will be passthrough to `concat::fragment`). Valid options: string. Default value: undef
 
-####`mounts`
+#### `mounts`
 
 Hash of `autofs::mount` resources. All resources will be mapped to this mapfile. Valid options: hash. Default value: Empty hash
 
 
-####The following parameters are available in the `::autofs::mount` type:
+#### The following parameters are available in the `::autofs::mount` type:
 
-####`mount`
+#### `mount`
 
 Name of the mount point. Valid options: string. Default value: `$name`
 
-####`mapfile`
+#### `mapfile`
 
 Name of the mapfile where is mount live. Valid options: string. No default value
 
-####`map`
+#### `map`
 
 Device, NFS server, local device or any other resource that can be mount.  
 
-####`options`
+#### `options`
 
 Defines mount options.
 
-####`order`
+#### `order`
 
 Order of the entry on the `master_config` config file (Will be passthrough to `concat::fragment`). Valid options: string. Default value: undef
 
-####`mounts`
+#### `mounts`
 
 Hash of `autofs::mount` resources. All resources will be mapped to this mapfile. Valid options: hash. Default value: Empty hash
 
