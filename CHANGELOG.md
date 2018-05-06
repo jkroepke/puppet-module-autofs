@@ -1,5 +1,6 @@
 XXXX-XX-XX Release next
 
+* Added Puppet 4 types for all parameters. ([#11](https://github.com/jkroepke/puppet-module-autofs/pull/11); rehanone)
 * Converted the module to use Puppet Development Kit. ([#10](https://github.com/jkroepke/puppet-module-autofs/pull/10); rehanone)
 
 
