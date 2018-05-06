@@ -1,0 +1,2 @@
+
+type Autofs::MountOptions = Pattern[/^-(.+)*/]

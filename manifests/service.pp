@@ -1,8 +1,5 @@
 #
 class autofs::service inherits autofs {
-  if ! ($autofs::service_ensure in [ 'running', 'stopped' ]) {
-    fail('service_ensure parameter must be running or stopped')
-  }
 
   if $autofs::service_manage == true {
     service { 'autofs':

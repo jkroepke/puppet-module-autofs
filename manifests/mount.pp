@@ -1,24 +1,16 @@
 #
 define autofs::mount(
-  $mapfile,
-  $map,
-  $mount   = $name,
-  $ensure  = 'present',
-  $options = '-rw',
-  $order   = undef,
+  String $mapfile,
+  String $map,
+  String $mount   = $title,
+  Enum[present, absent] $ensure  = present,
+  Autofs::MountOptions $options = '-rw',
+  Optional[String] $order   = undef,
 ) {
-  validate_string($mapfile)
-  validate_string($map)
-  validate_string($mount)
-  validate_string($options)
-
-  validate_re($ensure, '^present$|^absent$', 'ensure must be one of: present or absen')
-  validate_re($options, '^-', 'options must start with a hypen')
-
   include ::autofs
 
   if $mapfile == $autofs::master_config {
-    fail("You can't add mounts directly to ${autofs::mapfile_config_dir}/${autofs::master_config}!")
+    fail("You can't add mounts directly to ${autofs::map_config_dir}/${autofs::master_config}!")
   }
 
   if $ensure == 'present' {

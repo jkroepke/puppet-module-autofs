@@ -1,42 +1,29 @@
 #
-define autofs::mapfile(
-  $directory,
-  $ensure   = present,
-  $mapfile  = $name,
-  $options  = undef,
-  $order    = undef,
-  $maptype  = 'file' ,
-  $mounts   = {}
+define autofs::mapfile (
+  Optional[Stdlib::Absolutepath] $directory,
+  Enum[present, absent, purged] $ensure = present,
+  String $mapfile                       = $title,
+  Optional[String] $options             = undef,
+  Optional[String] $order               = undef,
+  String $maptype                       = file,
+  Hash $mounts                          = {}
 ) {
-
   include ::autofs
 
-  validate_string($mapfile)
-  validate_string($options)
-  validate_hash($mounts)
-
-  validate_re($ensure, '^present$|^absent$|^purged$', 'ensure must be one of: present, absent, or purged')
-
-  # surround $supported_map_types list items with ^...$ for regular expression matching
-  $supported_map_types_re = regsubst($::autofs::supported_map_types, '^.*$', '^\0$')
-  # join $supported_map_types list with commas, put an 'or' before the
-  # last supported type, and remove the comma if only two items in list.
-  $supported_map_types_str = regsubst(regsubst(join($::autofs::supported_map_types, ', '), ', ([^,]*)$', ', or \1'), '^([^,]*),( or [^,]*)$', '\1\2')
-  # check $maptype is valid
-  validate_re($maptype, $supported_map_types_re, "maptype must be one of: ${supported_map_types_str}")
+  if !($maptype in $::autofs::supported_map_types) {
+    fail("maptype parameter must be one of ${::autofs::supported_map_types}")
+  }
 
   # $mapfile_prefix is equal to "${maptype}:", _unless_:
   # 1)  $maptype == 'file'
   # 2)  $use_map_prefix is false
-  if $maptype != 'file' and $::autofs::use_map_prefix {
+  if $maptype != file and $::autofs::use_map_prefix {
     $mapfile_prefix = "${maptype}:"
   } else {
     $mapfile_prefix = ''
   }
 
-  if $mapfile != $autofs::master_config {
-    validate_absolute_path($directory)
-
+  if $mapfile != $autofs::master_config and $directory != undef {
     if $ensure == present {
       concat::fragment { "${autofs::master_config}/${mapfile}":
         target  => $autofs::master_config,
@@ -59,7 +46,7 @@ define autofs::mapfile(
   }
 
   # Only create the mapfile and any mounts if $maptype == file
-  if $maptype == 'file' {
+  if $maptype == file {
     concat { $mapfile:
       ensure         => $concat_ensure,
       owner          => $autofs::config_file_owner,
@@ -77,3 +64,4 @@ define autofs::mapfile(
     })
   }
 }
+
