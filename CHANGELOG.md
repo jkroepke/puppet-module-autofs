@@ -1,5 +1,6 @@
 XXXX-XX-XX Release next
 
+* Added acceptance tests for various supported platforms. ([#13](https://github.com/jkroepke/puppet-module-autofs/pull/12); rehanone)
 * Converted `params.pp` to hiera5 module data pattern. ([#12](https://github.com/jkroepke/puppet-module-autofs/pull/12); rehanone)
 * Added Puppet 4 types for all parameters. ([#11](https://github.com/jkroepke/puppet-module-autofs/pull/11); rehanone)
 * Converted the module to use Puppet Development Kit. ([#10](https://github.com/jkroepke/puppet-module-autofs/pull/10); rehanone)
