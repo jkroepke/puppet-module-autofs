@@ -1,0 +1,77 @@
+---
+appveyor.yml:
+  environment:
+  PUPPET_GEM_VERSION: "~> 4.0"
+  matrix:
+    - RUBY_VERSION: 24-x64
+      CHECK: "syntax lint"
+    - RUBY_VERSION: 24-x64
+      CHECK: metadata_lint
+    - RUBY_VERSION: 24-x64
+      CHECK: rubocop
+
+.rubocop.yml:
+  selected_profile: strict
+  default_configs: &default_configs
+    Style/UnneededPercentQ:
+      Enabled: false
+
+.gitlab-ci.yml:
+  delete: true
+
+.travis.yml:
+  bundler_args: ""
+  branches: {}
+  deploy:
+    user: jkroepke
+    password:
+      secure: "WiS9j4aI93DobVH/O/z6aHKOY8UL2hwn4+fflKuhvZzJPxfsYYfvQsyX43qetpVAIW7DCZLfO1QQlLF1/ywhe8Y9XRy923R6E7WckYPCGtGBpeTdS7p3Biss2H+ikxI9/5UFlewrdFxLxqgKz8lGLCt8zL1r7ggPWjJBfWEBtk2J9mj4BRTTGt6SWTSHwkdqjloQsPu32SXWY4nsU+87p+lO49YTOH2cS+54/DRCpccPl2AL+kXISDGiDZtlMyGdL2c0Z1e8etmOxbHN2X80YyOQY2GiKdGhzVfx5TDPElDXkOO5JkkZWmsz2D6BJYvu+s9awIJ6/pzGFDghZIK2MSgfUjJd9Vwt1lm48kHKsJ3DsSRIOHK+2ft/3nUl8y7j7KKQMcKKVN35/0uy/cXnD4acuxCh84e5bc0pmYy0gxLhLF6C9Ahv8pls7HhA+jaoUBNXIgCb685w6EgrkaeGMx1vz7VfZo56viod/zZ7XCXg8o5s7vthKMtYLnuGIEl2DvBC3KKtGvl4RnzFVUcZcB5lHgLZozskcwuWFtqd/AgqdIVRzKc6KmRWo8TkE/qOV79MaUpKGONmLMQfsz01HMn4m/NAmu4J55kFgFYkrkwy+9c/3Z9Ytce7goOnyxYYd0fFfaSM8vJCl7oe8Zb3znK2atMmpQAfDwYBwUNe1jU="
+
+
+  script: "\"bundle exec rake release_checks\""
+  docker_sets:
+  - set: docker/ubuntu-16.04
+  - set: docker/ubuntu-14.04
+  - set: docker/debian-8
+  - set: docker/centos-7
+  docker_defaults:
+    # values will replace @@SET@@ with the docker_sets' value
+    rvm: 2.4.1
+    sudo: required
+    dist: trusty
+    services: docker
+    env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_set=@@SET@@
+    script: bundle exec rake beaker
+
+Gemfile:
+  required:
+    ':system_tests':
+      - gem: 'puppet-module-posix-system-r#{minor_version}'
+        platforms: ruby
+      - gem: 'puppet-module-win-system-r#{minor_version}'
+        platforms:
+          - mswin
+          - mingw
+          - x64_mingw
+      - gem: beaker
+        version: '~> 3.13'
+        from_env: BEAKER_VERSION
+      - gem: beaker-abs
+        from_env: BEAKER_ABS_VERSION
+        version: '~> 0.1'
+      - gem: beaker-pe
+      - gem: beaker-hostgenerator
+        from_env: BEAKER_HOSTGENERATOR_VERSION
+      - gem: beaker-rspec
+        from_env: BEAKER_RSPEC_VERSION
+
+.project:
+  delete: true
+
+spec/acceptance/nodesets/centos-7-x64.yml:
+spec/acceptance/nodesets/debian-8-x64.yml:
+spec/acceptance/nodesets/default.yml:
+spec/acceptance/nodesets/docker/centos-7.yml:
+spec/acceptance/nodesets/docker/debian-8.yml:
+spec/acceptance/nodesets/docker/ubuntu-14.04.yml:
+spec/acceptance/nodesets/docker/ubuntu-16.04.yml:
