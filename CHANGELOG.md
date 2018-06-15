@@ -1,4 +1,4 @@
-XXXX-XX-XX Release next
+2018-06-15 Release 3.0.0
 
 * Added acceptance tests for various supported platforms. ([#13](https://github.com/jkroepke/puppet-module-autofs/pull/12); rehanone)
 * Converted `params.pp` to hiera5 module data pattern. ([#12](https://github.com/jkroepke/puppet-module-autofs/pull/12); rehanone)
