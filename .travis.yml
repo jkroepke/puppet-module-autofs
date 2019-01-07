@@ -7,62 +7,62 @@ before_install:
   - bundle -v
   - rm -f Gemfile.lock
   - gem update --system
-  - gem update bundler
   - gem --version
   - bundle -v
 script:
   - 'bundle exec rake $CHECK'
 bundler_args: 
 rvm:
-  - 2.4.1
+  - 2.5.1
 env:
-  - PUPPET_GEM_VERSION="~> 5.0" CHECK=spec
+  global:
+    - BEAKER_PUPPET_COLLECTION=puppet6 PUPPET_GEM_VERSION="~> 6.0"
 matrix:
   fast_finish: true
   include:
     -
       dist: trusty
-      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_set=docker/ubuntu-16.04
-      rvm: 2.4.1
+      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_set=docker/ubuntu-18.04 BEAKER_TESTMODE=apply
+      rvm: 2.5.1
       script: bundle exec rake beaker
       services: docker
       sudo: required
     -
       dist: trusty
-      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_set=docker/ubuntu-14.04
-      rvm: 2.4.1
+      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_set=docker/ubuntu-16.04 BEAKER_TESTMODE=apply
+      rvm: 2.5.1
       script: bundle exec rake beaker
       services: docker
       sudo: required
     -
       dist: trusty
-      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_set=docker/debian-8
-      rvm: 2.4.1
+      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_set=docker/ubuntu-14.04 BEAKER_TESTMODE=apply
+      rvm: 2.5.1
       script: bundle exec rake beaker
       services: docker
       sudo: required
     -
       dist: trusty
-      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_set=docker/centos-7
-      rvm: 2.4.1
+      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_set=docker/debian-8 BEAKER_TESTMODE=apply
+      rvm: 2.5.1
       script: bundle exec rake beaker
       services: docker
       sudo: required
     -
-      env: CHECK=rubocop
+      dist: trusty
+      env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_set=docker/centos-7 BEAKER_TESTMODE=apply
+      rvm: 2.5.1
+      script: bundle exec rake beaker
+      services: docker
+      sudo: required
     -
-      env: CHECK="syntax lint"
+      env: CHECK="syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop"
     -
-      env: CHECK=metadata_lint
+      env: CHECK=parallel_spec
     -
-      env: CHECK=release_checks
-    -
-      env: CHECK=spec
-    -
-      env: PUPPET_GEM_VERSION="~> 4.0" CHECK=spec
-      rvm: 2.1.9
+      env: PUPPET_GEM_VERSION="~> 5.0" CHECK=parallel_spec
+      rvm: 2.4.4
 branches:
-
 notifications:
   email: false
 deploy:
