@@ -17,20 +17,43 @@ ruby_version_segments = Gem::Version.new(RUBY_VERSION.dup).segments
 minor_version = ruby_version_segments[0..1].join('.')
 
 group :development do
-  gem "fast_gettext", '1.1.0',                         require: false if Gem::Version.new(RUBY_VERSION.dup) < Gem::Version.new('2.1.0')
-  gem "fast_gettext",                                  require: false if Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new('2.1.0')
-  gem "json_pure", '<= 2.0.1',                         require: false if Gem::Version.new(RUBY_VERSION.dup) < Gem::Version.new('2.0.0')
-  gem "json", '= 1.8.1',                               require: false if Gem::Version.new(RUBY_VERSION.dup) == Gem::Version.new('2.1.9')
-  gem "json", '= 2.0.4',                               require: false if Gem::Requirement.create('~> 2.4.2').satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))
-  gem "json", '= 2.1.0',                               require: false if Gem::Requirement.create(['>= 2.5.0', '< 2.7.0']).satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))
-  gem "puppet-module-posix-default-r#{minor_version}", require: false, platforms: [:ruby]
-  gem "puppet-module-posix-dev-r#{minor_version}",     require: false, platforms: [:ruby]
-  gem "puppet-module-win-default-r#{minor_version}",   require: false, platforms: [:mswin, :mingw, :x64_mingw]
-  gem "puppet-module-win-dev-r#{minor_version}",       require: false, platforms: [:mswin, :mingw, :x64_mingw]
+  gem "fast_gettext", '1.1.0',                                     require: false if Gem::Version.new(RUBY_VERSION.dup) < Gem::Version.new('2.1.0')
+  gem "fast_gettext",                                              require: false if Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new('2.1.0')
+  gem "json_pure", '<= 2.0.1',                                     require: false if Gem::Version.new(RUBY_VERSION.dup) < Gem::Version.new('2.0.0')
+  gem "json", '= 1.8.1',                                           require: false if Gem::Version.new(RUBY_VERSION.dup) == Gem::Version.new('2.1.9')
+  gem "json", '= 2.0.4',                                           require: false if Gem::Requirement.create('~> 2.4.2').satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))
+  gem "json", '= 2.1.0',                                           require: false if Gem::Requirement.create(['>= 2.5.0', '< 2.7.0']).satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))
+  gem "puppet-module-posix-default-r#{minor_version}",             require: false, platforms: [:ruby]
+  gem "puppet-module-posix-dev-r#{minor_version}",                 require: false, platforms: [:ruby]
+  gem "puppet-module-win-default-r#{minor_version}",               require: false, platforms: [:mswin, :mingw, :x64_mingw]
+  gem "puppet-module-win-dev-r#{minor_version}",                   require: false, platforms: [:mswin, :mingw, :x64_mingw]
+  gem "puppet-lint-absolute_template_path",                        require: false
+  gem "puppet-lint-alias-check",                                   require: false
+  gem "puppet-lint-classes_and_types_beginning_with_digits-check", require: false
+  gem "puppet-lint-concatenated_template_files-check",             require: false
+  gem "puppet-lint-file_ensure-check",                             require: false
+  gem "puppet-lint-file_source_rights-check",                      require: false
+  gem "puppet-lint-leading_zero-check",                            require: false
+  gem "puppet-lint-legacy_facts-check",                            require: false
+  gem "puppet-lint-resource_reference_syntax",                     require: false
+  gem "puppet-lint-strict_indent-check",                           require: false
+  gem "puppet-lint-top_scope_facts-check",                         require: false
+  gem "puppet-lint-trailing_comma-check",                          require: false
+  gem "puppet-lint-unquoted_string-check",                         require: false
+  gem "puppet-lint-variable_contains_upcase",                      require: false
+  gem "puppet-lint-version_comparison-check",                      require: false
 end
 group :system_tests do
-  gem "puppet-module-posix-system-r#{minor_version}", require: false, platforms: [:ruby]
-  gem "puppet-module-win-system-r#{minor_version}",   require: false, platforms: [:mswin, :mingw, :x64_mingw]
+  gem "beaker", *location_for(ENV['BEAKER_VERSION'] || '>= 4.2.0')
+  gem "beaker-rspec"
+  gem "beaker-hostgenerator"
+  gem "beaker-docker",                                                           require: false
+  gem "beaker-puppet",                                                           require: false
+  gem "beaker-puppet_install_helper",                                            require: false
+  gem "beaker-module_install_helper",                                            require: false
+  gem "rbnacl", '~> 4.0',                                                        require: false
+  gem "rbnacl-libsodium",                                                        require: false
+  gem "bcrypt_pbkdf", '~> 1.0',                                                  require: false
 end
 
 puppet_version = ENV['PUPPET_GEM_VERSION']

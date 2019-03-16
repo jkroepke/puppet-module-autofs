@@ -1,23 +1,23 @@
 #
 define autofs::mapfile (
   Optional[Stdlib::Absolutepath] $directory,
-  Enum[present, absent, purged] $ensure = present,
-  String $mapfile                       = $title,
-  Optional[String] $options             = undef,
-  Optional[String] $order               = undef,
-  String $maptype                       = file,
-  Hash $mounts                          = {}
+  Enum[present, absent, purged]  $ensure = present,
+  String $mapfile                        = $title,
+  Optional[String] $options              = undef,
+  Optional[String] $order                = undef,
+  String $maptype                        = 'file',
+  Hash $mounts                           = {}
 ) {
-  include ::autofs
+  include autofs
 
-  if !($maptype in $::autofs::supported_map_types) {
-    fail("maptype parameter must be one of ${::autofs::supported_map_types}")
+  if !($maptype in $autofs::supported_map_types) {
+    fail("maptype parameter must be one of ${autofs::supported_map_types}")
   }
 
   # $mapfile_prefix is equal to "${maptype}:", _unless_:
   # 1)  $maptype == 'file'
   # 2)  $use_map_prefix is false
-  if $maptype != file and $::autofs::use_map_prefix {
+  if $maptype != 'file' and $autofs::use_map_prefix {
     $mapfile_prefix = "${maptype}:"
   } else {
     $mapfile_prefix = ''
@@ -59,9 +59,14 @@ define autofs::mapfile (
       require        => Class['autofs::install'];
     }
 
-    create_resources('autofs::mount', $mounts, { # lint:ignore:strict_indent
-      map => $mapfile
-    })
+    $mounts.each | $mount, $options | {
+      autofs::mount {
+        default:
+          map => $mapfile;
+        $mount:
+          * => $options;
+      }
+    }
   }
 }
 
