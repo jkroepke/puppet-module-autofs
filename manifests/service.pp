@@ -1,6 +1,5 @@
 #
 class autofs::service inherits autofs {
-
   if $autofs::service_manage == true {
     service { 'autofs':
       ensure     => $autofs::service_ensure,

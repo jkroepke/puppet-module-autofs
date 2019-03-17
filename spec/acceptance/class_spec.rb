@@ -29,7 +29,7 @@ describe 'autofs class:', unless: UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
     it 'runs successfully to create and test mount for a ramdisk' do
       shell('mkdir -p /media/ramdisk')
 
-      pp = %q(
+      pp = <<-DOC
         class { 'autofs':
           package_ensure => present,
           mapfiles => {
@@ -45,7 +45,7 @@ describe 'autofs class:', unless: UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
             }
           }
         }
-      )
+      DOC
 
       apply_manifest(pp, catch_failures: true) do |r|
         expect(r.stderr).not_to match(%r{error}i)
@@ -61,6 +61,11 @@ describe 'autofs class:', unless: UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
       apply_manifest(pp, catch_failures: true) do |r|
         expect(r.stderr).not_to match(%r{error}i)
       end
+    end
+
+    describe service('autofs') do
+      it { is_expected.to be_running }
+      it { is_expected.to be_enabled }
     end
   end
 
