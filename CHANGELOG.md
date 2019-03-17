@@ -1,3 +1,9 @@
+2019-03-17 Release 4.0.0
+
+* Added Puppet 6
+* Added Debian 9
+* Upgrade PDK & modernize module ([#15](https://github.com/jkroepke/puppet-module-autofs/pull/15); jkroepke)
+
 2018-06-15 Release 3.0.0
 
 * Added acceptance tests for various supported platforms. ([#13](https://github.com/jkroepke/puppet-module-autofs/pull/12); rehanone)
