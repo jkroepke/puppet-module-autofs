@@ -1,3 +1,7 @@
+2019-03-17 Release 4.0.1
+
+* Fix forge deployment
+
 2019-03-17 Release 4.0.0
 
 * Added Puppet 6
