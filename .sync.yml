@@ -23,7 +23,7 @@ appveyor.yml:
   docker_defaults:
     bundler_args: '""'
   includes:
-    - env: CHECK=build DEPLOY_TO_FORGE=yes
+    - env: CHECK=clean DEPLOY_TO_FORGE=yes
 
 Gemfile:
   required:
