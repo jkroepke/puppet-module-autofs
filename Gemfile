@@ -44,16 +44,13 @@ group :development do
   gem "puppet-lint-version_comparison-check",                      require: false
 end
 group :system_tests do
-  gem "beaker", *location_for(ENV['BEAKER_VERSION'] || '>= 4.2.0')
-  gem "beaker-rspec"
+  gem "puppet-module-posix-system-r#{minor_version}",                            require: false, platforms: [:ruby]
+  gem "puppet-module-win-system-r#{minor_version}",                              require: false, platforms: [:mswin, :mingw, :x64_mingw]
+  gem "beaker", *location_for(ENV['BEAKER_VERSION'] || '~> 3.13')
+  gem "beaker-abs", *location_for(ENV['BEAKER_ABS_VERSION'] || '~> 0.1')
+  gem "beaker-pe",                                                               require: false
   gem "beaker-hostgenerator"
-  gem "beaker-docker",                                                           require: false
-  gem "beaker-puppet",                                                           require: false
-  gem "beaker-puppet_install_helper",                                            require: false
-  gem "beaker-module_install_helper",                                            require: false
-  gem "rbnacl", '~> 4.0',                                                        require: false
-  gem "rbnacl-libsodium",                                                        require: false
-  gem "bcrypt_pbkdf", '~> 1.0',                                                  require: false
+  gem "beaker-rspec"
 end
 
 puppet_version = ENV['PUPPET_GEM_VERSION']
