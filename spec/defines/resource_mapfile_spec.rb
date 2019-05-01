@@ -32,7 +32,7 @@ describe 'autofs::mapfile' do
       describe 'passing foo as maptype should fail' do
         let(:params) { { directory: '/foo', maptype: 'foo' } }
 
-        it { is_expected.to raise_error }
+        it { is_expected.to raise_error(Puppet::Error) }
       end
 
       describe 'passing file as maptype should pass' do

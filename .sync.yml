@@ -20,10 +20,6 @@ appveyor.yml:
     - set: docker/debian-9
     - set: docker/debian-8
     - set: docker/centos-7
-  docker_defaults:
-    bundler_args: '""'
-  includes:
-    - env: CHECK=clean DEPLOY_TO_FORGE=yes
 
 Gemfile:
   required:
@@ -43,23 +39,26 @@ Gemfile:
       - gem: 'puppet-lint-unquoted_string-check'
       - gem: 'puppet-lint-variable_contains_upcase'
       - gem: 'puppet-lint-version_comparison-check'
+    # https://github.com/puppetlabs/pdk-templates#enabling-beaker-system-tests
     ':system_tests':
+      - gem: 'puppet-module-posix-system-r#{minor_version}'
+        platforms: ruby
+      - gem: 'puppet-module-win-system-r#{minor_version}'
+        platforms:
+          - mswin
+          - mingw
+          - x64_mingw
       - gem: beaker
-        version: '>= 4.2.0'
+        version: '~> 3.13'
         from_env: BEAKER_VERSION
-      - gem: beaker-rspec
-        from_env: BEAKER_RSPEC_VERSION
+      - gem: beaker-abs
+        from_env: BEAKER_ABS_VERSION
+        version: '~> 0.1'
+      - gem: beaker-pe
       - gem: beaker-hostgenerator
         from_env: BEAKER_HOSTGENERATOR_VERSION
-      - gem: beaker-docker
-      - gem: beaker-puppet
-      - gem: beaker-puppet_install_helper
-      - gem: beaker-module_install_helper
-      - gem: rbnacl
-        version: '~> 4.0'
-      - gem: rbnacl-libsodium
-      - gem: bcrypt_pbkdf
-        version: '~> 1.0'
+      - gem: beaker-rspec
+        from_env: BEAKER_RSPEC_VERSION
 
 Rakefile:
   default_disabled_lint_checks:
