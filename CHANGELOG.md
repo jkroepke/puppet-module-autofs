@@ -1,3 +1,8 @@
+2019-05-01 Release 4.1.0
+
+* Bump dependencies ([#17](https://github.com/jkroepke/puppet-module-autofs/pull/17); jkroepke)
+* Add spec unit tests for autofs class ([#18](https://github.com/jkroepke/puppet-module-autofs/pull/18); jkroepke)
+
 2019-03-17 Release 4.0.1
 
 * Fix forge deployment
