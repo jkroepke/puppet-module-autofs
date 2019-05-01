@@ -18,7 +18,7 @@ describe 'autofs::mapfile' do
       describe 'passing present for ensure' do
         let(:params) { { directory: '/foo', ensure: 'present' } }
 
-        it { is_expected.not_to raise_error }
+        it { is_expected.not_to raise_error(Puppet::Error) }
         it do
           is_expected.to contain_concat__fragment('auto.master/auto.foo')
             .with_content(%r{/foo auto.foo})
@@ -32,13 +32,13 @@ describe 'autofs::mapfile' do
       describe 'passing foo as maptype should fail' do
         let(:params) { { directory: '/foo', maptype: 'foo' } }
 
-        it { is_expected.to raise_error }
+        it { is_expected.to raise_error(Puppet::Error) }
       end
 
       describe 'passing file as maptype should pass' do
         let(:params) { { directory: '/foo', maptype: 'file' } }
 
-        it { is_expected.not_to raise_error }
+        it { is_expected.not_to raise_error(Puppet::Error) }
         it do
           is_expected.to contain_concat__fragment('auto.master/auto.foo')
             .with_content(%r{/foo auto.foo})
@@ -52,7 +52,7 @@ describe 'autofs::mapfile' do
       describe 'passing absent for ensure' do
         let(:params) { { directory: '/foo', ensure: 'absent' } }
 
-        it { is_expected.not_to raise_error }
+        it { is_expected.not_to raise_error(Puppet::Error) }
         it do
           is_expected.not_to contain_concat__fragment('auto.master/auto.foo')
         end
@@ -65,7 +65,7 @@ describe 'autofs::mapfile' do
       describe 'passing purged for ensure' do
         let(:params) { { directory: '/foo', ensure: 'purged' } }
 
-        it { is_expected.not_to raise_error }
+        it { is_expected.not_to raise_error(Puppet::Error) }
         it do
           is_expected.not_to contain_concat__fragment('auto.master/auto.foo')
         end
@@ -90,7 +90,7 @@ describe 'autofs::mapfile' do
       describe 'with a different map type' do
         let(:params) { { directory: '/foo', maptype: 'program' } }
 
-        it { is_expected.not_to raise_error }
+        it { is_expected.not_to raise_error(Puppet::Error) }
         it do
           is_expected.to contain_concat__fragment('auto.master/auto.foo')
             .with_content(%r{program:auto.foo})
