@@ -39,6 +39,7 @@ Gemfile:
       - gem: 'puppet-lint-unquoted_string-check'
       - gem: 'puppet-lint-variable_contains_upcase'
       - gem: 'puppet-lint-version_comparison-check'
+    # https://github.com/puppetlabs/pdk-templates#enabling-beaker-system-tests
     ':system_tests':
       - gem: 'puppet-module-posix-system-r#{minor_version}'
         platforms: ruby
@@ -58,15 +59,6 @@ Gemfile:
         from_env: BEAKER_HOSTGENERATOR_VERSION
       - gem: beaker-rspec
         from_env: BEAKER_RSPEC_VERSION
-#      - gem: beaker-docker
-#      - gem: beaker-puppet
-#      - gem: beaker-puppet_install_helper
-#      - gem: beaker-module_install_helper
-#      - gem: rbnacl
-#        version: '~> 4.0'
-#      - gem: rbnacl-libsodium
-#      - gem: bcrypt_pbkdf
-#        version: '~> 1.0'
 
 Rakefile:
   default_disabled_lint_checks:
