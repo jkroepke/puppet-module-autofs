@@ -28,7 +28,6 @@ group :development do
   gem "puppet-module-win-default-r#{minor_version}", '~> 0.3',     require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "puppet-module-win-dev-r#{minor_version}", '~> 0.3',         require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "puppet-lint-absolute_template_path",                        require: false
-  gem "puppet-lint-absolute_classname-check",                      require: false
   gem "puppet-lint-alias-check",                                   require: false
   gem "puppet-lint-classes_and_types_beginning_with_digits-check", require: false
   gem "puppet-lint-concatenated_template_files-check",             require: false
