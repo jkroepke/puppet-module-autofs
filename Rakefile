@@ -75,3 +75,4 @@ EOM
   end
 end
 
+PuppetLint.configuration.absolute_classname_reverse = true

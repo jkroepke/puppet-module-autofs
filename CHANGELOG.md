@@ -1,6 +1,7 @@
 XXXX-XX-XX Release NEXT
 
 * Support Debian 10 and bump max version dependencies ([#19](https://github.com/jkroepke/puppet-module-autofs/pull/19); jkroepke)
+* Add puppet-lint-absolute_classname-check ([#20](https://github.com/jkroepke/puppet-module-autofs/pull/20); jkroepke)
 
 2019-05-01 Release 4.1.0
 
