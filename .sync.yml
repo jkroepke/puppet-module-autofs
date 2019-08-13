@@ -17,7 +17,7 @@ appveyor.yml:
     - set: docker/ubuntu-18.04
     - set: docker/ubuntu-16.04
     - set: docker/ubuntu-14.04
-    - set: docker/debian-10
+#    - set: docker/debian-10
     - set: docker/debian-9
     - set: docker/debian-8
     - set: docker/centos-7
@@ -26,6 +26,7 @@ Gemfile:
   required:
     ':development':
       - gem: 'puppet-lint-absolute_template_path'
+#      - gem: 'puppet-lint-absolute_classname-check'
       - gem: 'puppet-lint-alias-check'
       - gem: 'puppet-lint-classes_and_types_beginning_with_digits-check'
       - gem: 'puppet-lint-concatenated_template_files-check'
@@ -36,6 +37,7 @@ Gemfile:
       - gem: 'puppet-lint-resource_reference_syntax'
       - gem: 'puppet-lint-strict_indent-check'
       - gem: 'puppet-lint-top_scope_facts-check'
+      - gem: 'puppet-lint-topscope-variable-check'
       - gem: 'puppet-lint-trailing_comma-check'
       - gem: 'puppet-lint-unquoted_string-check'
       - gem: 'puppet-lint-variable_contains_upcase'
@@ -49,6 +51,17 @@ Gemfile:
           - mswin
           - mingw
           - x64_mingw
+      - gem: beaker
+        version: '~> 3.13'
+        from_env: BEAKER_VERSION
+      - gem: beaker-abs
+        from_env: BEAKER_ABS_VERSION
+        version: '~> 0.1'
+      - gem: beaker-pe
+      - gem: beaker-hostgenerator
+        from_env: BEAKER_HOSTGENERATOR_VERSION
+      - gem: beaker-rspec
+        from_env: BEAKER_RSPEC_VERSION
 
 Rakefile:
   default_disabled_lint_checks:

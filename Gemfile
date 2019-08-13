@@ -28,6 +28,7 @@ group :development do
   gem "puppet-module-win-default-r#{minor_version}", '~> 0.3',     require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "puppet-module-win-dev-r#{minor_version}", '~> 0.3',         require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "puppet-lint-absolute_template_path",                        require: false
+  gem "puppet-lint-absolute_classname-check",                      require: false
   gem "puppet-lint-alias-check",                                   require: false
   gem "puppet-lint-classes_and_types_beginning_with_digits-check", require: false
   gem "puppet-lint-concatenated_template_files-check",             require: false
@@ -38,6 +39,7 @@ group :development do
   gem "puppet-lint-resource_reference_syntax",                     require: false
   gem "puppet-lint-strict_indent-check",                           require: false
   gem "puppet-lint-top_scope_facts-check",                         require: false
+  gem "puppet-lint-topscope-variable-check",                       require: false
   gem "puppet-lint-trailing_comma-check",                          require: false
   gem "puppet-lint-unquoted_string-check",                         require: false
   gem "puppet-lint-variable_contains_upcase",                      require: false
