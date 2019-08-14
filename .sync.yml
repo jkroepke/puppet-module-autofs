@@ -17,10 +17,14 @@ appveyor.yml:
     - set: docker/ubuntu-18.04
     - set: docker/ubuntu-16.04
     - set: docker/ubuntu-14.04
-#    - set: docker/debian-10
+    - set: docker/debian-10
     - set: docker/debian-9
     - set: docker/debian-8
     - set: docker/centos-7
+
+.pdkignore:
+  paths:
+    - /.editorconfig
 
 Gemfile:
   required:
@@ -51,17 +55,6 @@ Gemfile:
           - mswin
           - mingw
           - x64_mingw
-      - gem: beaker
-        version: '~> 3.13'
-        from_env: BEAKER_VERSION
-      - gem: beaker-abs
-        from_env: BEAKER_ABS_VERSION
-        version: '~> 0.1'
-      - gem: beaker-pe
-      - gem: beaker-hostgenerator
-        from_env: BEAKER_HOSTGENERATOR_VERSION
-      - gem: beaker-rspec
-        from_env: BEAKER_RSPEC_VERSION
 
 Rakefile:
   linter_fail_on_warnings: true

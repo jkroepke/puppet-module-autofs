@@ -1,3 +1,7 @@
+# @summary
+#   This class handles autofs packages.
+#
+# @api private
 #
 class autofs::install inherits autofs {
   if $autofs::package_manage {
