@@ -1,3 +1,7 @@
+# @summary
+#   This class handles the autofs service.
+#
+# @api private
 #
 class autofs::service inherits autofs {
   if $autofs::service_manage == true {

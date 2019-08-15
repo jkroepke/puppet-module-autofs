@@ -1,6 +1,5 @@
 ---
 autofs::map_config_dir: '/etc/autofs'
-autofs::package_name: [ 'autofs' ]
 autofs::service_name: 'autofs'
 autofs::service_hasrestart: true
 autofs::service_hasstatus: true

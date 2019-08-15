@@ -37,9 +37,30 @@ class { 'autofs':
 autofs::package_manage: false
 autofs::service_restart: '/usr/bin/systemctl reload autofs'
 ```
-
+See [puppet documentation](https://puppet.com/docs/puppet/latest/hiera_automatic.html) for more informations about 
+automatic lookup of class parameters.
 
 ## Usage
+
+### Configure autofs
+See also: [autofs.conf man page](http://man7.org/linux/man-pages/man5/autofs.conf.5.html)
+
+```puppet
+class { 'autofs':
+  config => {
+    aufofs => {
+      mount_verbose => 'yes',
+      logging => 'verbose',
+    },
+    amd => {
+      dismount_interval => 600,
+    },
+    '/expamle/mount' => {
+      map_type => 'file',
+    },
+  },
+}
+```
 
 ### Added a map file
 ```puppet
