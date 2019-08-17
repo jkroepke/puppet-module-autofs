@@ -1,3 +1,7 @@
+2019-08-17 Release 5.0.1
+
+* Fixed documentation issue ([#22](https://github.com/jkroepke/puppet-module-autofs/pull/22); jkroepke)
+
 2019-08-17 Release 5.0.0
 
 * Support Debian 10 and bump max version dependencies ([#19](https://github.com/jkroepke/puppet-module-autofs/pull/19); jkroepke)
