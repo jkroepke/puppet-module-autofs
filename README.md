@@ -1,8 +1,12 @@
-# autofs
+# autofs puppet module
 
 Forked from [Reid Vandewiele](https://github.com/pdxcat/puppet-module-autofs)
 
-[![Puppet Forge](http://img.shields.io/puppetforge/v/jkroepke/autofs.svg)](https://forge.puppetlabs.com/jkroepke/autofs) [![Build Status](https://travis-ci.com/jkroepke/puppet-module-autofs.svg?branch=master)](https://travis-ci.com/jkroepke/puppet-module-autofs)
+[![Build Status](https://travis-ci.com/jkroepke/puppet-module-autofs.png?branch=master)](https://travis-ci.com/jkroepke/puppet-module-autofs)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/jkroepke/autofs.svg)](https://forge.puppetlabs.com/jkroepke/autofs)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/jkroepke/autofs.svg)](https://forge.puppetlabs.com/jkroepke/autofs)
+[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/jkroepke/autofs.svg)](https://forge.puppetlabs.com/jkroepke/autofs)
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/jkroepke/autofs.svg)](https://forge.puppetlabs.com/jkroepke/autofs)
 
 #### Table of Contents
 
@@ -47,14 +51,12 @@ See also: [autofs.conf man page](http://man7.org/linux/man-pages/man5/autofs.con
 
 ```puppet
 class { 'autofs':
-  config => {
-    aufofs => {
-      mount_verbose => 'yes',
-      logging => 'verbose',
-    },
-    amd => {
-      dismount_interval => 600,
-    },
+  mount_verbose => 'yes',
+  logging => 'verbose',
+  amd => {
+    dismount_interval => 600,
+  },
+  custom_config => {
     '/expamle/mount' => {
       map_type => 'file',
     },
