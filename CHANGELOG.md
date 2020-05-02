@@ -1,3 +1,9 @@
+2020-05-02 Release 5.1.0
+
+* Support & Tests for ubuntu 20.04 ([#26](https://github.com/jkroepke/puppet-module-autofs/pull/26); rehanone)
+* Update PDK to 1.17 ([#25](https://github.com/jkroepke/puppet-module-autofs/pull/25); jkroepke)
+* Support Enterprise Linux 8 ([#24](https://github.com/jkroepke/puppet-module-autofs/pull/24); jkroepke)
+
 2019-08-17 Release 5.0.1
 
 * Fixed documentation issue ([#22](https://github.com/jkroepke/puppet-module-autofs/pull/22); jkroepke)
