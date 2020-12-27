@@ -46,10 +46,6 @@ group :development do
   gem "puppet-lint-variable_contains_upcase",                      require: false
   gem "puppet-lint-version_comparison-check",                      require: false
 end
-group :system_tests do
-  gem "puppet-module-posix-system-r#{minor_version}", require: false, platforms: [:ruby]
-  gem "puppet-module-win-system-r#{minor_version}",   require: false, platforms: [:mswin, :mingw, :x64_mingw]
-end
 
 puppet_version = ENV['PUPPET_GEM_VERSION']
 facter_version = ENV['FACTER_GEM_VERSION']
