@@ -1,3 +1,8 @@
+2020-12-27 Release 5.2.0
+
+* Support Puppet 7
+* Update PDK to 1.18
+
 2020-05-02 Release 5.1.0
 
 * Support & Tests for ubuntu 20.04 ([#26](https://github.com/jkroepke/puppet-module-autofs/pull/26); rehanone)
