@@ -79,6 +79,8 @@ Gemfile:
         version: '~> 1.6'
       - gem: 'beaker-rspec'
         version: '~> 6.2'
+      - gem: 'beaker-docker'
+        version: '~> 0.3'
 
 Rakefile:
   linter_fail_on_warnings: true

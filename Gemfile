@@ -49,6 +49,7 @@ group :system_tests do
   gem "beaker-hostgenerator", '~> 1.1',                         require: false
   gem "beaker-puppet", '~> 1.6',                                require: false
   gem "beaker-rspec", '~> 6.2',                                 require: false
+  gem "beaker-docker", '~> 0.3',                                require: false
 end
 
 puppet_version = ENV['PUPPET_GEM_VERSION']
