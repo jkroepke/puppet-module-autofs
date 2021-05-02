@@ -79,6 +79,7 @@ Gemfile:
       - gem: 'beaker-hostgenerator'
       - gem: 'beaker-puppet'
       - gem: 'beaker-puppet_install_helper'
+      - gem: 'beaker-module_install_helper'
       - gem: 'beaker-rspec'
       - gem: 'beaker-docker'
 
