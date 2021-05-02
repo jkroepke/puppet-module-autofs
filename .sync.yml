@@ -17,6 +17,7 @@ appveyor.yml:
   delete: true
 
 .travis.yml:
+  dist: focal
   simplecov: false
   before_install_pre:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin || true
@@ -32,6 +33,8 @@ appveyor.yml:
     - set: docker/debian-8
     - set: docker/centos-7
     - set: docker/centos-8
+  docker_defaults:
+    dist: focal
   branches:
     - master
   remove_branches:
@@ -74,13 +77,10 @@ Gemfile:
       - gem: 'beaker'
         version: '~> 4.0'
       - gem: 'beaker-hostgenerator'
-        version: '~> 1.1'
       - gem: 'beaker-puppet'
-        version: '~> 1.6'
+      - gem: 'beaker-puppet_install_helper'
       - gem: 'beaker-rspec'
-        version: '~> 6.2'
       - gem: 'beaker-docker'
-        version: '~> 0.3'
 
 Rakefile:
   linter_fail_on_warnings: true
