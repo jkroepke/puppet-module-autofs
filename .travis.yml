@@ -1,6 +1,6 @@
 ---
 os: linux
-dist: xenial
+dist: focal
 language: ruby
 cache: bundler
 before_install:
@@ -30,7 +30,7 @@ jobs:
   include:
     -
       bundler_args: --with system_tests
-      dist: trusty
+      dist: focal
       env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_set=docker/ubuntu-20.04 BEAKER_TESTMODE=apply
       rvm: 2.5.7
       script: bundle exec rake beaker
@@ -39,7 +39,7 @@ jobs:
       sudo: required
     -
       bundler_args: --with system_tests
-      dist: trusty
+      dist: focal
       env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_set=docker/ubuntu-18.04 BEAKER_TESTMODE=apply
       rvm: 2.5.7
       script: bundle exec rake beaker
@@ -48,7 +48,7 @@ jobs:
       sudo: required
     -
       bundler_args: --with system_tests
-      dist: trusty
+      dist: focal
       env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_set=docker/ubuntu-16.04 BEAKER_TESTMODE=apply
       rvm: 2.5.7
       script: bundle exec rake beaker
@@ -57,7 +57,7 @@ jobs:
       sudo: required
     -
       bundler_args: --with system_tests
-      dist: trusty
+      dist: focal
       env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_set=docker/ubuntu-14.04 BEAKER_TESTMODE=apply
       rvm: 2.5.7
       script: bundle exec rake beaker
@@ -66,7 +66,7 @@ jobs:
       sudo: required
     -
       bundler_args: --with system_tests
-      dist: trusty
+      dist: focal
       env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_set=docker/debian-10 BEAKER_TESTMODE=apply
       rvm: 2.5.7
       script: bundle exec rake beaker
@@ -75,7 +75,7 @@ jobs:
       sudo: required
     -
       bundler_args: --with system_tests
-      dist: trusty
+      dist: focal
       env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_set=docker/debian-9 BEAKER_TESTMODE=apply
       rvm: 2.5.7
       script: bundle exec rake beaker
@@ -84,7 +84,7 @@ jobs:
       sudo: required
     -
       bundler_args: --with system_tests
-      dist: trusty
+      dist: focal
       env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_set=docker/debian-8 BEAKER_TESTMODE=apply
       rvm: 2.5.7
       script: bundle exec rake beaker
@@ -93,7 +93,7 @@ jobs:
       sudo: required
     -
       bundler_args: --with system_tests
-      dist: trusty
+      dist: focal
       env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_set=docker/centos-7 BEAKER_TESTMODE=apply
       rvm: 2.5.7
       script: bundle exec rake beaker
@@ -102,7 +102,7 @@ jobs:
       sudo: required
     -
       bundler_args: --with system_tests
-      dist: trusty
+      dist: focal
       env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_set=docker/centos-8 BEAKER_TESTMODE=apply
       rvm: 2.5.7
       script: bundle exec rake beaker
@@ -113,10 +113,6 @@ jobs:
       env: CHECK="check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint"
       stage: static
     -
-      env: PUPPET_GEM_VERSION="~> 5.0" CHECK=parallel_spec
-      rvm: 2.4.5
-      stage: spec
-    -
       env: PUPPET_GEM_VERSION="~> 6.0" CHECK=parallel_spec
       rvm: 2.5.7
       stage: spec
@@ -125,8 +121,8 @@ jobs:
       stage: deploy
 branches:
   only:
-    - master
     - /^v\d/
+    - master
 notifications:
   email: false
 deploy:

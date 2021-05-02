@@ -1,14 +1,23 @@
 ---
+common:
+  disable_legacy_facts: true
+
 appveyor.yml:
   delete: true
 
 .gitlab-ci.yml:
   delete: true
 
+.gitpod.Dockerfile:
+  unmanaged: false
+.gitpod.yml:
+  unmanaged: false
+
 .rubocop_todo.yml:
   delete: true
 
 .travis.yml:
+  dist: focal
   simplecov: false
   before_install_pre:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin || true
@@ -24,6 +33,12 @@ appveyor.yml:
     - set: docker/debian-8
     - set: docker/centos-7
     - set: docker/centos-8
+  docker_defaults:
+    dist: focal
+  branches:
+    - master
+  remove_branches:
+    - main
 
 .pdkignore:
   paths:
@@ -40,7 +55,6 @@ Gemfile:
       - gem: 'puppet-lint-file_ensure-check'
       - gem: 'puppet-lint-file_source_rights-check'
       - gem: 'puppet-lint-leading_zero-check'
-      - gem: 'puppet-lint-legacy_facts-check'
       - gem: 'puppet-lint-resource_reference_syntax'
       - gem: 'puppet-lint-strict_indent-check'
       - gem: 'puppet-lint-top_scope_facts-check'
@@ -52,14 +66,22 @@ Gemfile:
     # https://github.com/puppetlabs/pdk-templates#enabling-beaker-system-tests
     ':system_tests':
       - gem: 'puppet-module-posix-system-r#{minor_version}'
-        version: '~> 0.4'
+        version: '~> 1.0'
         platforms: ruby
       - gem: 'puppet-module-win-system-r#{minor_version}'
-        version: '~> 0.4'
+        version: '~> 1.0'
         platforms:
           - mswin
           - mingw
           - x64_mingw
+      - gem: 'beaker'
+        version: '~> 4.0'
+      - gem: 'beaker-hostgenerator'
+      - gem: 'beaker-puppet'
+      - gem: 'beaker-puppet_install_helper'
+      - gem: 'beaker-module_install_helper'
+      - gem: 'beaker-rspec'
+      - gem: 'beaker-docker'
 
 Rakefile:
   linter_fail_on_warnings: true

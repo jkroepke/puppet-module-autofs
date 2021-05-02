@@ -6,7 +6,7 @@ require 'beaker/module_install_helper'
 UNSUPPORTED_PLATFORMS = ['windows', 'darwin'].freeze
 
 run_puppet_install_helper unless ENV['BEAKER_provision'] == 'no'
-install_ca_certs unless ENV['PUPPET_INSTALL_TYPE'] =~ %r{pe}i
+install_ca_certs unless ENV['PUPPET_INSTALL_TYPE'].match?(%r{pe}i)
 install_module_on(hosts)
 install_module_dependencies_on(hosts)
 
