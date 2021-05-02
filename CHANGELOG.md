@@ -1,3 +1,8 @@
+2021-05-XX Release 6.0.0
+
+* Update PDK to 2.1 ([#30](https://github.com/jkroepke/puppet-module-autofs/pull/30); jkroepke)
+* Drop support for Debian 6 & 7, Ubuntu 12.04 RHEL 5 and CentOS 5.
+
 2020-12-27 Release 5.2.0
 
 * Support Puppet 7
