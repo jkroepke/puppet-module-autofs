@@ -5,7 +5,7 @@ on_supported_os.each do |os, f|
     let(:facts) { {} }
 
     let(:conf_path) do
-      if os =~ %r{archlinux|gentoo}
+      if os.match?(%r{archlinux|gentoo})
         '/etc/autofs/'
       else
         '/etc/'
@@ -24,13 +24,13 @@ on_supported_os.each do |os, f|
         it { is_expected.to contain_class('autofs::config') }
         it { is_expected.to contain_class('autofs::service') }
 
-        if os =~ %r{gentoo}
+        if os.include?('gentoo')
           it { is_expected.to contain_package('net-fs/autofs') }
         else
           it { is_expected.to contain_package('autofs') }
         end
 
-        if os =~ %r{debian}
+        if os.include?('debian')
           it { is_expected.to contain_package('autofs-ldap') }
         end
 
@@ -108,7 +108,7 @@ on_supported_os.each do |os, f|
         let(:params) do
           {
             custom_config: {
-              :"/mnt/example" => {
+              "/mnt/example": {
                 key: 'value',
                 browse_mode: true,
               },
