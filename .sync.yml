@@ -36,6 +36,8 @@ appveyor.yml:
       collection: puppet7
     - set: centos8-64
       collection: puppet7
+#    - set: opensuse15-64
+#      collection: puppet7
   docker_defaults:
     dist: focal
     env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true BEAKER_HYPERVISOR=docker BEAKER_PUPPET_COLLECTION=@@COLLECTION@@ BEAKER_setfile=@@SET@@ BEAKER_TESTMODE=@@TESTMODE@@
