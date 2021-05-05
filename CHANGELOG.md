@@ -1,4 +1,4 @@
-2021-05-XX Release 6.0.0
+2021-05-05 Release 6.0.0
 
 * Add Support for OpenSUSE 15 ([#29](https://github.com/jkroepke/puppet-module-autofs/pull/29); rehanone)
 * Update PDK to 2.1 ([#30](https://github.com/jkroepke/puppet-module-autofs/pull/30); jkroepke)
