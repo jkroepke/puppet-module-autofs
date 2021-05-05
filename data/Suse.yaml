@@ -1,0 +1,11 @@
+---
+autofs::map_config_dir: '/etc'
+autofs::service_name: 'autofs'
+autofs::service_hasrestart: true
+autofs::service_hasstatus: true
+autofs::service_restart: 'restart'
+
+autofs::supported_map_types: [ 'file', 'program', 'yp', 'nisplus', 'hesiod', 'ldap', 'ldaps' ]
+autofs::use_map_prefix: true
+
+autofs::master_map_name: /etc/auto.master
